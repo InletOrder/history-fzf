@@ -1,13 +1,6 @@
 function history-fzf() {
-  local tac
 
-  if which tac > /dev/null; then
-    tac="tac"
-  else
-    tac="tail -r"
-  fi
-
-  BUFFER=$(history -n 1 | eval $tac | fzf --height 20% --query "$LBUFFER")
+  BUFFER=$(history -n 1 | fzf --tac --height 20% --query "$LBUFFER")
   CURSOR=$#BUFFER
 
   zle reset-prompt
